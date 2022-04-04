@@ -170,6 +170,7 @@ public class GameView extends View {
                     }
 
                 }else{
+                    gameActivity.showToast(moveState.message);
                     endTurn=false;
                 }
 
