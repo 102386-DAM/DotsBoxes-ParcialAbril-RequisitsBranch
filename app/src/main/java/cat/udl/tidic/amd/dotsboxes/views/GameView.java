@@ -11,6 +11,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -163,13 +164,14 @@ public class GameView extends View {
 
                     if (!endTurn){
                         game.currentPlayer().setSquares(game.currentPlayer().getSquares() + 1);
-                        isEndGame(); //This function control the end of game and the score when the player complets a square.
+                        isEndGame(); //This function csontrol the end of game and the score when the player complets a square.
                     }
                     else {
                         changeTurn(); //set the player turn in the view
                     }
 
                 }else{
+                    gameActivity.showToast(moveState.message);
                     endTurn=false;
                 }
 
@@ -199,7 +201,7 @@ public class GameView extends View {
             } else {
                 gameActivity.showToast("Red win!");
             }
-            gameActivity.endGame();
+            gameActivity.initDialogFragment(game);
         }else {
             gameActivity.updateScore(game.currentPlayer().getName(), game.currentPlayer().getSquares());
         }

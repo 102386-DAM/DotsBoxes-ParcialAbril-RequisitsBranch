@@ -5,9 +5,11 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cat.udl.tidic.amd.dotsboxes.models.Game;
 import cat.udl.tidic.amd.dotsboxes.models.Player;
 import cat.udl.tidic.amd.dotsboxes.viewmodels.GameViewModel;
 import cat.udl.tidic.amd.dotsboxes.views.GameView;
@@ -62,7 +64,19 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void endGame() {
+    public void initDialogFragment(Game game) {
+        GameEndDialog dialog = GameEndDialog.newInstance(game, this);
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "GAME_END_DIALOG");
+    }
+
+    public void restartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+    public void returnToInitView() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
